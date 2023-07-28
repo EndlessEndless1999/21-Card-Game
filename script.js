@@ -1,6 +1,7 @@
 
 import inquirer from 'inquirer';
 
+import chalk from 'chalk'
 
 // pseudo
 
@@ -43,7 +44,7 @@ const addCards = (cards) => {
     }
    }
     playerScore = sum;
-    console.log(`The players score is ${playerScore}`);
+    console.log(chalk.green(`The players score is ${playerScore}`));
     evaluateSum(sum); 
 
 }
@@ -64,7 +65,7 @@ const addDealerCards = (cards) => {
     }
    }
     dealerScore = sum;
-    console.log(`The dealers score is ${dealerScore}`);
+    console.log(chalk.magenta(`The dealers score is ${dealerScore}`));
     evaluateDealerSum(sum); 
 
 }
@@ -109,7 +110,7 @@ function dealerTurn () {
 // if the player goes over 21, they lose and the game is restarted
 function evaluateSum(sumCards) {
     if(sumCards > 21){
-        console.log(`You lose. Your total is ${sumCards}`);
+        console.log(chalk.red(`You lose. Your total is ${sumCards}`));
     } else {
         playerDecision();
     }
@@ -117,9 +118,9 @@ function evaluateSum(sumCards) {
 
 function evaluateWinner(player, dealer){
     if(player > dealer){
-        console.log('You win! Well done.');
+        console.log(chalk.green('You win! Well done.'));
     } else {
-        console.log('You lose. Try again!');
+        console.log(chalk.yellow('You lose. Try again!'));
     }
 }
 
@@ -135,29 +136,6 @@ function evaluateDealerSum(sumCards){
 }
 
 addCards(playerCards);
-
-
-
-
-
-
-// when the dealer reaches 17 they cannot get another card
-
-// compare score
-// win counter
-
-// play again?
-
-// // Pull 2 cards out of the hand to exchange
-// const toExchange = hand.splice(2, 2);
-
-// // Discard those 2 cards
-// deck.discard(toExchange);
-
-// // Draw 2 new ones from the deck
-// hand.push(...deck.draw(2));
-
-
 
 
 
