@@ -42,8 +42,6 @@ const addCards = (cards) => {
     evaluateSum(sum); 
 
 }
-console.log(playerCards)
-console.log(addCards(playerCards))
 
 
 
@@ -70,7 +68,6 @@ function playerDecision () {
             ///ADD CARD TO PLAYERS HAND
             playerCards.push(...deck.draw(1));
             addCards(playerCards);
-            console.log(playerCards)
         }else {
             ///COMPUTERS TURN
         }
@@ -81,14 +78,14 @@ function playerDecision () {
 // if the player goes over 21, they lose and the game is restarted
 function evaluateSum(sumCards) {
     if(sumCards > 21){
-        return  "You lose"
+        console.log(`You lose. Your total is ${sumCards}`);
     } else {
         playerDecision();
     }
 }
 
 addCards(playerCards);
-console.log(playerDecision())
+
 
 
 
