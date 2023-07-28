@@ -10,6 +10,9 @@ import { decks } from 'cards';
 // Create a standard 52 card deck 
 const deck = new decks.StandardDeck();
 
+let playerScore;
+let dealerScore;
+
 // Shuffle the deck
 deck.shuffleAll();
 
@@ -39,10 +42,32 @@ const addCards = (cards) => {
         sum += parseInt(cards[i].rank.abbrn);
     }
    }
+    playerScore = sum;
+    console.log(`The players score is ${playerScore}`);
     evaluateSum(sum); 
 
 }
 
+const addDealerCards = (cards) => {
+    //1. get each value of the hand
+    //2. add them together 
+
+    let sum = 0;
+
+   for (let i= 0; i < cards.length; i++) {
+    if(cards[i].rank.abbrn === "J" || cards[i].rank.abbrn === "Q" || cards[i].rank.abbrn === "K"){
+        sum += 10;
+    } else if(cards[i].rank.abbrn === "A") {
+        sum += 1; //TBC
+    } else {
+        sum += parseInt(cards[i].rank.abbrn);
+    }
+   }
+    dealerScore = sum;
+    console.log(`The dealers score is ${dealerScore}`);
+    evaluateDealerSum(sum); 
+
+}
 
 
 
@@ -69,10 +94,16 @@ function playerDecision () {
             playerCards.push(...deck.draw(1));
             addCards(playerCards);
         }else {
-            ///COMPUTERS TURN
+            addDealerCards(dealerCards);
         }
     })
 
+}
+
+function dealerTurn () {
+    console.log(dealerCards);
+    dealerCards.push(...deck.draw(1));
+    addDealerCards(dealerCards);
 }
 
 // if the player goes over 21, they lose and the game is restarted
@@ -81,6 +112,25 @@ function evaluateSum(sumCards) {
         console.log(`You lose. Your total is ${sumCards}`);
     } else {
         playerDecision();
+    }
+}
+
+function evaluateWinner(player, dealer){
+    if(player > dealer){
+        console.log('You win! Well done.');
+    } else {
+        console.log('You lose. Try again!');
+    }
+}
+
+function evaluateDealerSum(sumCards){
+    if(sumCards > 21){
+        evaluateWinner(playerScore, 0)
+    }
+    if(sumCards >= 17){
+        evaluateWinner(playerScore, dealerScore);
+    }else{
+        dealerTurn();
     }
 }
 
