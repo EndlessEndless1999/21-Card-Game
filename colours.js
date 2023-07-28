@@ -1,7 +1,6 @@
 import { decks } from 'cards';
 import { hearts, spades, clubs, diamonds } from 'cards/build/suits/index.js';
 import chalk from 'chalk';
-import inquirer from 'inquirer';
 
 const deck = new decks.StandardDeck;
 deck.shuffleAll();
@@ -36,6 +35,7 @@ const colourCards = (userChoice) => {
         return chalk.magenta(`Card: Diamonds Value: ${id}`);
     }
 } 
+
 getUserCard()
 
 // const card = deck.draw(1)
